@@ -8,7 +8,7 @@ interface Todo {
   completed: boolean;
 }
 
-const useTodos = () => {
+const UseTodos = () => {
   const fetchTodos = () =>
     axios
       .get<Todo[]>("https://jsonplaceholder.typicode.com/todos")
@@ -16,7 +16,8 @@ const useTodos = () => {
   return useQuery<Todo[], Error>({
     queryKey: ["toods"],
     queryFn: fetchTodos,
+    staleTime: 10 * 1000,
   });
 };
 
-export default useTodos;
+export default UseTodos;

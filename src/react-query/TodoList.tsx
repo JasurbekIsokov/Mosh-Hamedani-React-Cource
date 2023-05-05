@@ -1,7 +1,7 @@
-import useTodos from "./hook/useTodos";
+import UseTodos from "./hook/useTodos";
 
 const TodoList = () => {
-  const { data: todos, error, isLoading } = useTodos();
+  const { data: todos, error, isLoading } = UseTodos();
 
   if (isLoading) return <p>Loading...</p>;
 
