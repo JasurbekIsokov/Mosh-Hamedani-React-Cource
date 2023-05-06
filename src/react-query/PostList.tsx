@@ -1,5 +1,6 @@
 import { useState } from "react";
 import UsePostList from "./hook/UsePostList";
+import ParameterizedQueriesPost from "./ParameterizedQueriesPost";
 
 const PostList = () => {
   // Parameterized Queries
@@ -19,39 +20,35 @@ const PostList = () => {
   if (error) return <p>{error.message}</p>;
 
   return (
-    <>
+    <div
+      style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}
+    >
       {/* Parameterized Queries */}
-      {/* <select
-        onChange={(event) => setUserId(parseInt(event.target.value))}
-        value={userId}
-        className="form-select mb-3"
-      >
-        <option value=""></option>
-        <option value="1">User 1</option>
-        <option value="2">User 2</option>
-        <option value="3">User 3</option>
-      </select> */}
-      <ul className="list-group">
-        {posts?.map((post) => (
-          <li key={post.id} className="list-group-item">
-            {post.title}
-          </li>
-        ))}
-      </ul>
-      <button
-        disabled={page === 1}
-        className="btn btn-primary  my-3"
-        onClick={() => setPage(page - 1)}
-      >
-        Previous
-      </button>
-      <button
-        className="btn btn-primary my-3 ms-1"
-        onClick={() => setPage(page + 1)}
-      >
-        Next
-      </button>
-    </>
+      <ParameterizedQueriesPost />
+
+      <div>
+        <ul className="list-group">
+          {posts?.map((post) => (
+            <li key={post.id} className="list-group-item">
+              {post.title}
+            </li>
+          ))}
+        </ul>
+        <button
+          disabled={page === 1}
+          className="btn btn-primary  my-3"
+          onClick={() => setPage(page - 1)}
+        >
+          Previous
+        </button>
+        <button
+          className="btn btn-primary my-3 ms-1"
+          onClick={() => setPage(page + 1)}
+        >
+          Next
+        </button>
+      </div>
+    </div>
   );
 };
 
