@@ -1,6 +1,6 @@
 import { useState } from "react";
-import ParameterizedQueries from "./hook/ParameterizedQueries";
 import Loader from "../components/Loader";
+import ParameterizedQueries from "./hook/ParameterizedQueries";
 
 const ParameterizedQueriesPost = () => {
   const [userId, setUserId] = useState<number>();

@@ -26,6 +26,7 @@ const UsePostList = (query: PostQuery) =>
         })
         .then((res) => res.data),
     staleTime: 10 * 1000,
+    keepPreviousData: true,
   });
 
 export default UsePostList;

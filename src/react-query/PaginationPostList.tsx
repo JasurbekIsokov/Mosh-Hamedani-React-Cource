@@ -1,6 +1,6 @@
 import { useState } from "react";
-import UsePostList from "./hook/UsePostList";
 import Loader from "../components/Loader";
+import UsePostList from "./hook/UsePostList";
 
 const PaginationPostList = () => {
   const pageSize = 10;
