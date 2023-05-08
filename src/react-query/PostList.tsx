@@ -1,3 +1,4 @@
+import TodoList from "./TodoList";
 import InfinitePostList from "./InfinitePostLists";
 import PaginationPostList from "./PaginationPostList";
 import ParameterizedQueriesPost from "./ParameterizedQueriesPost";
@@ -5,15 +6,15 @@ import ParameterizedQueriesPost from "./ParameterizedQueriesPost";
 const PostList = () => {
   return (
     <>
-      <div
+      {/* <InfinitePostList /> */}
+
+      {/* <div
         style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}
       >
         <ParameterizedQueriesPost />
 
         <PaginationPostList />
-      </div>
-
-      <InfinitePostList />
+      </div> */}
     </>
   );
 };
