@@ -1,19 +1,15 @@
 import { useRef } from "react";
-import axios from "axios";
-
-import { Todo } from "./hook/UseTodos";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useAddTodo from "./hook/useAddTodo";
 
 const TodoForm = () => {
   const ref = useRef<HTMLInputElement>(null);
 
-  let customeId: number = 0;
+  let customId: number = 0;
 
   const generateId = (): number => {
-    customeId = new Date().getTime();
+    customId = new Date().getTime();
 
-    return customeId;
+    return customId;
   };
 
   const addTodo = useAddTodo(() => {
@@ -34,7 +30,7 @@ const TodoForm = () => {
 
           if (ref.current && ref.current.value)
             addTodo.mutate({
-              id: customeId,
+              id: customId,
               title: ref.current?.value,
               completed: false,
               userId: 1,
@@ -45,8 +41,12 @@ const TodoForm = () => {
           <input ref={ref} type="text" className="form-control" />
         </div>
         <div className="col">
-          <button className="btn btn-primary" disabled={addTodo.isLoading}>
-            {addTodo.isLoading ? "Adding..." : "Add"}
+          <button
+            className="btn btn-primary"
+            // disabled={addTodo.isLoading}
+          >
+            {/* {addTodo.isLoading ? "Adding..." : "Add"} */}
+            Add
           </button>
         </div>
       </form>
