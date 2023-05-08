@@ -3,51 +3,21 @@ import axios from "axios";
 
 import { Todo } from "./hook/UseTodos";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
-interface AddTodoContext {
-  previousTodos: Todo[];
-}
+import useAddTodo from "./hook/useAddTodo";
 
 const TodoForm = () => {
   const ref = useRef<HTMLInputElement>(null);
 
-  const queryClient = useQueryClient();
+  let customeId: number = 0;
 
-  const addTodo = useMutation<Todo, Error, Todo, AddTodoContext>({
-    mutationFn: (todo: Todo) =>
-      axios
-        .post<Todo>("https://jsonplaceholder.typicode.com/todos", todo)
-        .then((res) => res.data),
+  const generateId = (): number => {
+    customeId = new Date().getTime();
 
-    onMutate(newTodo: Todo) {
-      const previousTodos = queryClient.getQueryData<Todo[]>(["todos"]) || [];
-      console.log(newTodo);
-      // APPROACH: Invalidating the cache
+    return customeId;
+  };
 
-      // queryClient.invalidateQueries({
-      //   queryKey: ["todos"],
-      // });
-
-      //APPROACH 2: Updating the data in the cache
-      queryClient.setQueryData<Todo[]>(["todos"], (todos) => [
-        newTodo,
-        ...(todos || []),
-      ]);
-      if (ref.current) ref.current.value = "";
-
-      return { previousTodos };
-    },
-    onSuccess: (savedTodo, newTodo) => {
-      queryClient.setQueryData<Todo[]>(["todos"], (todos) =>
-        todos?.map((todo) => (todo === newTodo ? savedTodo : todo))
-      );
-    },
-
-    onError: (error, newTodo, context) => {
-      if (!context) return;
-
-      queryClient.setQueryData<Todo[]>(["todos"], context.previousTodos);
-    },
+  const addTodo = useAddTodo(() => {
+    if (ref.current) ref.current.value = "";
   });
 
   return (
@@ -60,9 +30,11 @@ const TodoForm = () => {
         onSubmit={(e) => {
           e.preventDefault();
 
+          generateId();
+
           if (ref.current && ref.current.value)
             addTodo.mutate({
-              id: 0,
+              id: customeId,
               title: ref.current?.value,
               completed: false,
               userId: 1,
