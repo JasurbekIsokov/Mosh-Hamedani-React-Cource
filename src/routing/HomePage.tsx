@@ -1,4 +1,6 @@
 const HomePage = () => {
+  // throw new Error();
+
   return (
     <>
       <p>
