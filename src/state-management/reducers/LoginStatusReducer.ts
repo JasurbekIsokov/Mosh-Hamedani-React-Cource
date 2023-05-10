@@ -12,7 +12,7 @@ type Action = Login | Logout;
 const LoginStatusReducer = (state: string, action: Action): string => {
   switch (action.type) {
     case "LOGIN":
-      return "Jasurbek Isokov";
+      return action.userName;
     case "LOGOUT":
       return "";
   }

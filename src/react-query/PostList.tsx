@@ -6,15 +6,15 @@ import ParameterizedQueriesPost from "./ParameterizedQueriesPost";
 const PostList = () => {
   return (
     <>
-      {/* <InfinitePostList /> */}
+      <InfinitePostList />
 
-      {/* <div
+      <div
         style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}
       >
         <ParameterizedQueriesPost />
 
         <PaginationPostList />
-      </div> */}
+      </div>
     </>
   );
 };
