@@ -10,17 +10,24 @@ import HomePage from "./state-management/HomePage";
 import { useReducer, Dispatch } from "react";
 import TasksReducer from "./state-management/reducers/TasksReducer";
 import TasksContext from "./state-management/context/TasksContext";
+import LoginStatusReducer from "./state-management/reducers/LoginStatusReducer";
+import LoginStatusContext from "./state-management/context/LoginStatusContext";
 
 function App() {
-  const [tasks, dispatch] = useReducer(TasksReducer, []);
+  const [tasks, TasksDispatch] = useReducer(TasksReducer, []);
+  const [user, LoginStatusDispatch] = useReducer(LoginStatusReducer, "");
 
   return (
     <>
       {/* <PostList /> */}
-      <TasksContext.Provider value={{ tasks, dispatch }}>
-        <NavBar />
-        <HomePage />
-      </TasksContext.Provider>
+      <LoginStatusContext.Provider
+        value={{ user, dispatch: LoginStatusDispatch }}
+      >
+        <TasksContext.Provider value={{ tasks, dispatch: TasksDispatch }}>
+          <NavBar />
+          <HomePage />
+        </TasksContext.Provider>
+      </LoginStatusContext.Provider>
     </>
   );
 }

@@ -1,18 +1,21 @@
 interface Login {
   type: "LOGIN";
-  userName: string;
+  user: string;
 }
 
 interface Logout {
   type: "LOGOUT";
 }
 
-type Action = Login | Logout;
+export type LoginStatusAction = Login | Logout;
 
-const LoginStatusReducer = (state: string, action: Action): string => {
+const LoginStatusReducer = (
+  user: string,
+  action: LoginStatusAction
+): string => {
   switch (action.type) {
     case "LOGIN":
-      return action.userName;
+      return action.user;
     case "LOGOUT":
       return "";
   }

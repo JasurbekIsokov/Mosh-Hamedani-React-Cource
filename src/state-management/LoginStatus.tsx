@@ -1,8 +1,8 @@
-import { useReducer, useState } from "react";
-import LoginStatusReducer from "./reducers/LoginStatusReducer";
+import { useContext } from "react";
+import LoginStatusContext from "./context/LoginStatusContext";
 
 const LoginStatus = () => {
-  const [user, dispatch] = useReducer(LoginStatusReducer, "");
+  const { user, dispatch } = useContext(LoginStatusContext);
 
   if (user)
     return (
@@ -18,7 +18,7 @@ const LoginStatus = () => {
   return (
     <div>
       <a
-        onClick={() => dispatch({ type: "LOGIN", userName: "Jasurbek Isokov" })}
+        onClick={() => dispatch({ type: "LOGIN", user: "Jasurbek Isokov" })}
         href="#"
       >
         Login
