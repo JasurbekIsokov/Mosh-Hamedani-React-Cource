@@ -7,27 +7,19 @@ import TaskList from "./state-management/TaskList";
 import LoginStatus from "./state-management/LoginStatus";
 import NavBar from "./state-management/NavBar";
 import HomePage from "./state-management/HomePage";
-import { useReducer, Dispatch } from "react";
-import TasksReducer from "./state-management/reducers/TasksReducer";
-import TasksContext from "./state-management/context/TasksContext";
-import LoginStatusReducer from "./state-management/reducers/LoginStatusReducer";
-import LoginStatusContext from "./state-management/context/LoginStatusContext";
+import UseLoginStatusContextProvider from "./state-management/context/hooks/UseLoginStatusContextProvider";
+import UseTasksContextProvider from "./state-management/context/hooks/UseTasksContextProvider";
 
 function App() {
-  const [tasks, TasksDispatch] = useReducer(TasksReducer, []);
-  const [user, LoginStatusDispatch] = useReducer(LoginStatusReducer, "");
-
   return (
     <>
       {/* <PostList /> */}
-      <LoginStatusContext.Provider
-        value={{ user, dispatch: LoginStatusDispatch }}
-      >
-        <TasksContext.Provider value={{ tasks, dispatch: TasksDispatch }}>
+      <UseLoginStatusContextProvider>
+        <UseTasksContextProvider>
           <NavBar />
           <HomePage />
-        </TasksContext.Provider>
-      </LoginStatusContext.Provider>
+        </UseTasksContextProvider>
+      </UseLoginStatusContextProvider>
     </>
   );
 }
